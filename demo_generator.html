@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Generator示例</title>
+</head>
+
+<body>
+    <h1>Generator示例</h1>
+    <script type="text/javascript">
+    function* myDom() {
+      console.log('generator1...');
+      let rest1 = yield (()=>{
+        setInterval(()=>{
+          // next里面的值作为上一次yield执行的赋值
+          m.next({code:1,data:{}})
+        },2000)
+        return 1;//此时的返回值作为第一次yield执行完毕返回的对象的value值，还有一个done代表generator函数是否执行完毕
+      })();
+      console.log('generator2...', rest1);
+      let rest2 = yield (()=>{
+        setInterval(()=>{
+          m.next({code:2,data:{}})
+        },2000)
+        return 2
+      })();
+      console.log('generator3...',rest2);
+      let rest3 = yield  (()=>{
+        setInterval(()=>{
+          m.next()
+        },2000)
+        return 3
+      })();
+      return 4;
+    }
+
+    let m = myDom();
+    console.log('gener1..', m.next());
+
+    </script>
+</body>
+
+</html>
