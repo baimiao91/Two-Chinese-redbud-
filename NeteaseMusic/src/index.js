@@ -1,5 +1,5 @@
 import dva from 'dva';
-// import './index.css';
+import './index.css';
 import './common/css/common.scss'
 import './common/js/flexible'
 
@@ -10,10 +10,10 @@ const app = dva();
 // app.use({});
 
 // 3. Model
-// app.model(require('./models/example').default);
+app.model(require('./models/found').default);
 
 // 4. Router
-app.router(require('./router').default);
+app.router(require('./router/index').default);
 
 // 5. Start
 app.start('#root');
