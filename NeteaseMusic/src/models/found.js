@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 10:51:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-14 11:03:58
+ * @Last Modified time: 2019-02-15 09:03:42
  */
 
 import {
@@ -25,7 +25,7 @@ export default {
 			put
 		}) {
 			let res = yield forBanner();
-			console.log('data:::::', res);
+			console.log('data:::::banner::', res);
 			yield put({
 				type: 'updateState',
 				payload: {

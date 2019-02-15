@@ -6,7 +6,7 @@ import {
 
 import RouterView from '../router/RouterView'
 
-import styles from './MainPage.scss';
+import './MainPage.scss';
 
 function MainPage(props) {
   return (

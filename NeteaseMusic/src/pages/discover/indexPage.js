@@ -2,13 +2,11 @@
  * @Author: i白描
  * @Date:   2019-02-13 18:49:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-14 20:56:50
+ * @Last Modified time: 2019-02-15 09:47:33
  */
 
 
-import React, {
-	useEffect
-} from 'react';
+import React from 'react';
 import {
 	NavLink
 } from 'dva/router';
@@ -20,14 +18,7 @@ import RouterView from '../../router/RouterView'
 import styles from './indexPage.scss';
 
 function IndexPage(props) {
-	console.log('props::::', props);
-
-	// 在hooks中使用useEffect处理异步操作
-	useEffect(() => {
-		props.forBanner();
-
-	}, []);
-
+	console.log('props::::discover::', props);
 
 	return (
 		<div className={styles.discoverContainer}>
@@ -42,13 +33,14 @@ function IndexPage(props) {
 					</div>
 					<div className={styles.tab}>
 						<div className={styles.changeView}>
-							<NavLink to="/main/discover/recommend">个性推荐</NavLink>
-							<NavLink to="/main/discover/hoststation">主播电台</NavLink>
+							<NavLink to="/main/discover/recommend" className={styles.atag}>个性推荐</NavLink>
+							<NavLink to="/main/discover/hoststation" className={styles.atag}>主播电台</NavLink>
 						</div>
 					</div>
+					<div className={styles.bgc}></div>
 				</div>
 				<div className={styles.otherCont}>
-					RouterView
+					<RouterView routes={props.routes} ></RouterView>
 				</div>
 			</div>
     </div>
@@ -57,19 +49,4 @@ function IndexPage(props) {
 
 IndexPage.propTypes = {};
 
-const mapStateToProps = state => {
-	console.log('state::::', state);
-	return state
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		forBanner: () => {
-			dispatch({
-				type: 'found/forBanner'
-			})
-		}
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IndexPage);
+export default connect()(IndexPage);
