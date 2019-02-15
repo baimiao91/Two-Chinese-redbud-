@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-13 13:52:44
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-15 16:33:48
+* @Last Modified time: 2019-02-15 18:44:10
 */
 
 :global {
@@ -40,7 +40,11 @@
         height:50%;
       }
       &.active {
-        color:rgb(39,45,47);  
+        color:rgb(39,45,47);
+        &::after{
+          content:'';
+          display: none;
+        }
       }
     }
     a:nth-child(1) {

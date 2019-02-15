@@ -4,7 +4,7 @@ import {
   NavLink
 } from 'dva/router';
 
-import RouterView from '../router/RouterView'
+import RouterView from '@/router/RouterView'
 
 import './MainPage.scss';
 

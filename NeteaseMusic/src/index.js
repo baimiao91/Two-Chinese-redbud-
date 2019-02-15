@@ -12,6 +12,7 @@ const app = dva();
 
 // 3. Model
 app.model(require('./models/found').default);
+app.model(require('./models/login').default);
 
 // 4. Router
 app.router(require('./router/index').default);
