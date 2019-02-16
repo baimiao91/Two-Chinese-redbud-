@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 18:50:29
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-15 20:58:09
+ * @Last Modified time: 2019-02-16 08:49:32
  */
 import {
 	routerRedux
@@ -29,7 +29,7 @@ export default {
 			dispatch,
 			history
 		}) { // eslint-disable-line
-			console.log('history::::', history);
+			console.log('history::::login::reducers', history);
 			return history.listen(({
 				pathname
 			}) => {
@@ -40,7 +40,7 @@ export default {
 						//利用redux做路由跳转
 						console.log('pathname:::跳转前：：：', pathname);
 						dispatch(routerRedux.replace({
-							pathname: `/registl?r=${pathname}`
+							pathname: `/registl?r=${encodeURIComponent(pathname)}`
 						}))
 					}
 				}
@@ -57,7 +57,7 @@ export default {
 		}) { // eslint-disable-line
 			let res = yield call(login, payload.phone, payload.password)
 			console.log(res, '::::登录res');
-			if (res.data && res.data.code == 200) {
+			if (res.data && res.data.code === 200) {
 				setToken(res.data.account.id)
 				yield put({
 					type: 'updateState',

@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 19:34:54
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-15 20:57:01
+ * @Last Modified time: 2019-02-16 09:56:54
  */
 import React, {
 	useState,
@@ -19,15 +19,21 @@ import Tel from '@/assets/tel.png';
 import Lock from '@/assets/lock.png';
 
 function LoginPage(props) {
-	// console.log('props::::', props);
+	console.log('props::::', props);
 	let [phone, setPhone] = useState(17600194842);
 	let [password, setPasswd] = useState('147852..');
 
 	useEffect(() => {
-		if (props.loginStatus == 'fail') {
+		if (props.loginStatus === 'fail') {
 			Toast.info('登录失败!');
-		} else if (props.loginStatus == 'success') {
+		} else if (props.loginStatus === 'success') {
 			console.log('登陆成功');
+			if (props.location.search) {
+				// console.log('解码：：：：', decodeURIComponent(props.location.search.replace('?r=', '')));
+				props.history.replace(decodeURIComponent(props.location.search.replace('?r=', '')))
+			} else {
+				props.history.replace('/main/discover/recommend')
+			}
 		}
 	}, [props.loginStatus])
 
