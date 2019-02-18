@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:53
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-15 15:50:42
+ * @Last Modified time: 2019-02-18 19:32:36
  */
 import React, {
 	useEffect
@@ -24,10 +24,11 @@ function IndexPage(props) {
 	// 在hooks中使用useEffect处理异步操作
 	useEffect(() => {
 		props.forBanner();
-
+		props.forReSongList();
 	}, []);
 	return (
 		<div className={style.recommendContainer}>
+			<div className={style.bgc}></div>
 			<div className={style.bannerCon}>
 				<Carousel infinite>
 					{
@@ -57,6 +58,19 @@ function IndexPage(props) {
 					<span>排行榜</span>
 				</p>
 			</div>
+			<div className={style.reSongsList}>
+				<div className="songListTitle">推荐歌单</div>
+				<div className={style.showList}>
+					{
+						props.reSongList.map((item,index)=>{
+							return <p key={index}>
+								<img src={item.picUrl} alt=""/>
+								<span>{item.name}</span>
+							</p>
+						})
+					}
+				</div>
+			</div>
 		</div>
 	);
 }
@@ -72,6 +86,11 @@ const mapDispatchToProps = dispatch => {
 		forBanner: () => {
 			dispatch({
 				type: 'found/forBanner'
+			})
+		},
+		forReSongList: () => {
+			dispatch({
+				type: 'found/forReSongList'
 			})
 		}
 	}

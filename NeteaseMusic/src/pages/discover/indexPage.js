@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-13 18:49:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-15 09:47:33
+ * @Last Modified time: 2019-02-18 18:42:15
  */
 
 
@@ -37,7 +37,7 @@ function IndexPage(props) {
 							<NavLink to="/main/discover/hoststation" className={styles.atag}>主播电台</NavLink>
 						</div>
 					</div>
-					<div className={styles.bgc}></div>
+					
 				</div>
 				<div className={styles.otherCont}>
 					<RouterView routes={props.routes} ></RouterView>

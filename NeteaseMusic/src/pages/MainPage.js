@@ -13,7 +13,7 @@ function MainPage(props) {
     <div className="mainContainer">
       <RouterView routes={props.routes}></RouterView>
       <footer className="footer">
-        <NavLink to="/main/discover">
+        <NavLink to="/main/discover/recommend">
           <span className="icon" />
           <span className="text">发现</span>
         </NavLink>

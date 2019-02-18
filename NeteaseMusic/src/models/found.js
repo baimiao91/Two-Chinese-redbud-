@@ -2,19 +2,21 @@
  * @Author: i白描
  * @Date:   2019-02-14 10:51:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-15 09:03:42
+ * @Last Modified time: 2019-02-18 20:39:05
  */
 
 import {
-	forBanner
-} from '../services/api';
+	forBanner,
+	forReSongList
+} from '@/services/api';
 
 export default {
 
 	namespace: 'found',
 
 	state: {
-		banner: []
+		banner: [],
+		reSongList: []
 	},
 
 	effects: {
@@ -25,7 +27,6 @@ export default {
 			put
 		}) {
 			let res = yield forBanner();
-			console.log('data:::::banner::', res);
 			yield put({
 				type: 'updateState',
 				payload: {
@@ -33,6 +34,32 @@ export default {
 				}
 			})
 		},
+		* forReSongList({
+			payload
+		}, {
+			call,
+			put
+		}) {
+			let res = yield forReSongList();
+			console.log('data:forReSongList::', res);
+			if (res.data.code && res.data.code === 200) {
+				let list = res.data.result.slice(0, 6);
+				list.map((item, index) => {
+					if (item.playCount > 100000 && item.playCount < 100000000) {
+						return item.playCount = parseInt(item.playCount / 10000).toString() + '万'
+					} else if (item.playCount > 100000000) {
+						return item.playCount = parseInt(item.playCount / 100000000).toString() + '亿'
+					}
+					return item;
+				})
+				yield put({
+					type: 'updateState',
+					payload: {
+						reSongList: list
+					}
+				})
+			}
+		}
 	},
 
 	reducers: {
