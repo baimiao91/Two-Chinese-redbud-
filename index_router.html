@@ -50,6 +50,14 @@
                                 )
                             }
                         }else{
+                            if (!isReplace){
+                                // 追加历史记录
+                                window.history.pushState({}, '', hash);
+                            }else{
+                                // 替换历史记录
+                                window.history.replaceState({}, '', hash);
+                            }
+                            this.historyChange();
                         }
                     })
                 })
@@ -76,13 +84,33 @@
                         }
                     })  
                 }else{
+                    window.addEventListener('popstate', ()=>{
+                       this.historyChange();
+                    })
+                }
+            }
+            this.historyChange = function(){
+                // 获取当前路由路径
+                let path = window.location.pathname;
+                    // 在路由表中查找匹配项
+                    let index = this.routes.findIndex(item=>item.path==path);
+                if (index != -1){
+                    // 查找到，更新视图
+                    document.querySelector('#router-view').innerHTML = this.routes[index].component;
+                }else{
+                    // 查找是否有重定向配置
+                    let redirect = this.routes.findIndex(item=>item.path=='*');
+                    if (redirect != -1){
+                        window.history.replaceState({}, '', this.routes[redirect].redirect);
+                        this.historyChange();
+                    }
                 }
             }
             this.init();
         }
         // 调用路由
         new Router({
-            mode: 'hash',
+            mode: 'history',
             routes:[
                 { path: '/home.html', component: '<h1>主页</h1><h4>新一代前端工程师：我们啥都会</h4>' },
                 { path: '/news.html', component: '<h1>新闻</h1><h4>今天2018-11-5，上课还得穿工装</h4>' },

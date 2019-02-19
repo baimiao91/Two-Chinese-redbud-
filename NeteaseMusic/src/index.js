@@ -11,9 +11,14 @@ const app = dva();
 // app.use({});
 
 // 3. Model
+// 挂载发现页models
 app.model(require('./models/found').default);
+// 挂载登录页models
 app.model(require('./models/login').default);
+// 挂载账户页models
 app.model(require('./models/account').default);
+// 挂载搜索页models
+app.model(require('./models/search').default);
 
 // 4. Router
 app.router(require('./router/index').default);

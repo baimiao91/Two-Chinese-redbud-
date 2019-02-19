@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 18:41:16
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-14 19:34:11
+ * @Last Modified time: 2019-02-19 15:07:55
  */
 import React from 'react'
 import {
@@ -12,7 +12,6 @@ import {
 } from 'dva/router'
 
 export default props => {
-	console.log(props)
 	return <Switch>{
 		props.routes && props.routes.map((item,index)=>{
 			return <Route key={index} path={item.path} render={ (props)=>{

@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:49
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-18 20:48:26
+ * @Last Modified time: 2019-02-19 11:36:09
  */
 import React, {
 	useEffect
@@ -30,8 +30,23 @@ function IndexPage(props) {
 	return (
 		<div className={style.accountContainer}>
 			<div className="header">账号<img src={paihang} alt="" className="h_icon" /></div>
-			<div>{props.userDet.createTime}</div>
-			<div>{props.profile.nickname}</div>
+			<div className={style.basicMsg}>
+				<div className="avatarName">
+					<div className="avatar"><img src={props.profile.avatarUrl} alt=""/></div>
+					<div className="nameL">
+						<div className="name">{props.profile.nickname}</div>
+						<div className="level">Lv.{props.userDet.level}</div>
+					</div>
+				</div>
+			</div>
+			<div className={style.dvnamic}>
+			</div>
+			<div className={style.navam}>
+				<div className={style.navalist}></div>
+				<div className={style.navalist}></div>
+				<div className={style.navalist}></div>
+				<div className={style.navalist}></div>
+			</div>
 		</div>
 	);
 }

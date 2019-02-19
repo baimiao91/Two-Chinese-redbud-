@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 18:50:29
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-16 08:49:32
+ * @Last Modified time: 2019-02-19 15:07:40
  */
 import {
 	routerRedux
@@ -29,7 +29,7 @@ export default {
 			dispatch,
 			history
 		}) { // eslint-disable-line
-			console.log('history::::login::reducers', history);
+			// console.log('history::::login::reducers', history);
 			return history.listen(({
 				pathname
 			}) => {

@@ -1,0 +1,117 @@
+/*
+* @Author: i白描
+* @Date:   2019-02-19 11:44:39
+* @Last Modified by:   i白描
+* @Last Modified time: 2019-02-19 20:33:50
+*/
+
+:global {
+  .searchContainer {
+    width: 100%;
+    height: 100%;
+    font-size: 0.34rem;
+    background: rgb(255,255,255);
+  }
+
+  .s_heads {
+    width: 100%;
+    height: 1.6rem;
+    background: rgb(214, 61, 53);
+    padding: 0 0.36rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+
+    .iptc-s {
+      width: 85%;
+      height: 1.26rem;
+      border-radius: 0.6rem;
+      background: rgb(224, 101, 94);
+      display: flex;
+      align-items: center;
+      padding: 0 0.2rem;
+      box-sizing: border-box;
+
+      .iconL {
+        width: 0.74rem;
+        height: 0.7rem;
+      }
+
+      input::input-placeholder {
+        color: rgb(249, 161, 152);
+      }
+
+      .inputS {
+        background: transparent;
+        flex: 1;
+      }
+    }
+  }
+
+  .restCon {
+  	width:100%;
+  	height:auto;
+  	.hots {
+  		width: 100%;
+  		height:auto;
+  		overflow:hidden;
+  		padding:0 0.2rem;
+  		box-sizing:border-box;
+  		.h_title {
+  			padding:0.3rem 0;
+  			font-weight: bold;
+  		}
+  		.keysItem {
+				display: flex;
+	  		align-items:center;
+	  		flex-wrap:wrap;
+  		}
+  		
+  	}
+  }
+  .restCon .hots .keysItem {
+  	span {
+			display: inline-block;
+			padding:0.25rem;
+			background:rgb(238,239,240);
+			margin-right: 0.2rem;
+			border-radius: 0.4rem;
+			margin-bottom: 0.2rem;
+			b {
+				font-size: 0.22rem;
+		  	padding: 0 0.1rem;
+		  	background: rgb(255,0,0);
+		  	color:rgb(255,255,255);
+		  	margin-left: 0.1rem;
+		  	border-radius: 0.1rem;
+			}
+		}
+  }
+  .restCon .resultkey {
+  	width: 100%;
+  	height:auto;
+  	padding:0 0.2rem;
+  	box-sizing: border-box;
+  	background: rgb(255,255,255);
+  	p {
+  		height:1.6rem;
+  		line-height: 1.6rem;
+  		display: flex;
+  		align-items: center;
+  		img {
+  			width: 0.8rem;
+  			height: 0.8rem;
+  			display: block;
+  		}
+  		span {
+  			flex:1;
+  			height:100%;
+  			overflow: hidden;
+  			text-overflow: ellipsis;
+  			border-bottom: 0.02rem solid rgb(238,239,240);
+  		}
+  	}
+  }
+}

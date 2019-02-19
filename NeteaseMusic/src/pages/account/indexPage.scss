@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-14 19:47:49
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-18 20:25:07
+* @Last Modified time: 2019-02-19 11:36:50
 */
 
 :global {
@@ -25,9 +25,54 @@
     	transform: translateY(-50%);
     }
   }
+  .avatarName {
+		width: 100%;
+		height:auto;
+		display: flex;
+		.avatar {
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius:50%;
+			overflow: hidden;
+			margin-right: 0.15rem;
+		}
+	}
+	.nameL {
+		.name {
+			line-height: 1rem;
+		}
+	}
 }
 
 .accountContainer {
   width: 100%;
   height: 100%;
+}
+
+.basicMsg {
+	width:100%;
+	height:auto;
+	padding:0.52rem 0.36rem 0.6rem 0.52rem;
+	box-sizing:border-box;
+	border-bottom: 0.02rem solid rgb(237,238,239);
+}
+
+.dvnamic {
+	width:100%;
+	height:1.8rem;
+	border-bottom: 0.02rem solid rgb(237,238,239);
+}
+
+.navam {
+	width:100%;
+	height:auto;
+	>div:nth-child(1) {
+		background: #ff0;
+	}
+}
+
+.navalist {
+	width:100%;
+	height:1.6rem;
+	border-bottom:0.02rem solid rgb(237,238,239);
 }

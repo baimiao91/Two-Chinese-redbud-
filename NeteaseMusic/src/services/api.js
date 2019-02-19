@@ -19,3 +19,18 @@ export function login(phone, password) {
 export function getUserDetail(uid) {
 	return request(`/user/detail?uid=${uid}`)
 }
+
+// 获取热门搜索
+export function forSearchHot() {
+	return request('/search/hot')
+}
+
+// 获取实时搜索key
+export function forKeySearch(keyword) {
+	return request(`/search/suggest?keywords=${keyword}&type=mobile`)
+}
+
+// 获取确定歌曲
+export function getTrueSongs(keyword) {
+	return request(`/search/?keywords=${keyword}`)
+}
