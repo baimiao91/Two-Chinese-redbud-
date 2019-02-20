@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 14:51:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 20:42:27
+ * @Last Modified time: 2019-02-20 11:35:57
  */
 
 import {
@@ -16,8 +16,9 @@ export default {
 	namespace: 'search',
 
 	state: {
-		searchHot: [],
-		keyRest: []
+		searchHot: [], //热门搜索
+		keyRest: [], //推荐的搜索建议key值
+		songsList: []
 	},
 
 	effects: {
@@ -44,14 +45,17 @@ export default {
 			put
 		}) {
 			let rest = yield call(forKeySearch, payload);
-			let suggest = rest.data.result;
 			let tresult = [];
-			suggest.order.forEach((item, index) => {
-				suggest[item] && suggest[item].forEach((value, indx) => {
-					value.type = item;
+			if (Object.keys(rest.data.result).length) {
+				let suggest = rest.data.result;
+				suggest.order.forEach((item, index) => {
+					suggest[item] && suggest[item].forEach((value, indx) => {
+						value.type = item;
+					})
+					tresult = [...tresult, ...suggest[item]]
 				})
-				tresult = [...tresult, ...suggest[item]]
-			})
+			}
+
 			yield put({
 				type: 'updateState',
 				payload: {
@@ -67,7 +71,14 @@ export default {
 			put
 		}) {
 			let rest = yield call(getTrueSongs, payload);
-			console.log('真正确定的歌曲：：：：', rest);
+			if (rest.data && rest.data.code === 200) {
+				yield put({
+					type: 'updateState',
+					payload: {
+						songsList: rest.data.result.songs
+					}
+				})
+			}
 		}
 	},
 

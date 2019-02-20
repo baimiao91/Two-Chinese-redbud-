@@ -34,3 +34,13 @@ export function forKeySearch(keyword) {
 export function getTrueSongs(keyword) {
 	return request(`/search/?keywords=${keyword}`)
 }
+
+// 获取歌曲详情 ?ids=传入音乐 id(支持多个 id, 用 , 隔开)
+export function getSongsDet(ids) {
+	return request(`/song/detail?ids=${ids}`)
+}
+
+// 获取歌曲url
+export function getSongUrl(ids) {
+	return request(`/song/url?id=${ids}`)
+}

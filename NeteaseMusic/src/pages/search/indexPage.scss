@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-19 11:44:39
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-19 20:33:50
+* @Last Modified time: 2019-02-20 11:50:22
 */
 
 :global {
@@ -107,11 +107,30 @@
   		}
   		span {
   			flex:1;
+        display: block;
   			height:100%;
   			overflow: hidden;
   			text-overflow: ellipsis;
   			border-bottom: 0.02rem solid rgb(238,239,240);
   		}
   	}
+  }
+  .restCon .resultSongs {
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    padding:0 0.2rem;
+    box-sizing: border-box;
+    background-color: rgb(255,255,255);
+    p {
+      line-height: 1.6rem;
+      span {
+        display: block;
+        width:80%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
   }
 }

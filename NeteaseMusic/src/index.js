@@ -19,6 +19,8 @@ app.model(require('./models/login').default);
 app.model(require('./models/account').default);
 // 挂载搜索页models
 app.model(require('./models/search').default);
+// 挂载播放页models
+app.model(require('./models/play').default);
 
 // 4. Router
 app.router(require('./router/index').default);

@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 18:36:36
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 11:42:18
+ * @Last Modified time: 2019-02-20 15:48:25
  */
 
 import React from 'react';
@@ -17,6 +17,7 @@ import RouterView from './RouterView';
 import MainPage from '@/pages/MainPage';
 import LoginRegistPage from '@/pages/registLogin/indexPage'
 import SearchPage from '@/pages/search/indexPage'
+import PlayPage from '@/pages/player/indexPage'
 // 引入二级路由组件
 import DiscoverPage from '@/pages/discover/indexPage'
 import VideoPage from '@/pages/video/indexPage'
@@ -41,6 +42,9 @@ let config = {
 	}, {
 		path: '/search',
 		component: SearchPage
+	}, {
+		path: '/play/:ids?',
+		component: PlayPage
 	}, {
 		path: '/main',
 		component: MainPage,

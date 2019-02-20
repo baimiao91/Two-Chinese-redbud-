@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 11:41:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 20:58:03
+ * @Last Modified time: 2019-02-20 15:46:34
  */
 import React, {
 	useState,
@@ -37,32 +37,50 @@ function IndexPage(props) {
 		}
 	}, [searchKey])
 
+	// input改变事件
 	function searchKeys(e) {
 		// console.log('eeL::', e.target.value);
 		if (!e.target.value) {
 			setSearchKey(e.target.value);
 			setFlagHots(true);
 			setFlagKeyRest(false);
+			setFlagSongRest(false);
 		} else {
 			setSearchKey(e.target.value);
 			setFlagHots(false);
 			setFlagKeyRest(true);
+			setFlagSongRest(false);
 		}
 	}
 
+	// 
 	function searchResult(e) {
 		if (searchKey && e.keyCode === 13) {
-			props.getKeySearch(searchKey);
+			props.getTrueSongs(searchKey);
+			setFlagHots(false);
+			setFlagKeyRest(false);
+			setFlagSongRest(true);
 		}
 	}
 
+	// 搜索建议点击之后的响应结果
 	function restByKey(e) {
-		console.log(e.target.innerHTML, '。。。准备搜索歌曲');
-		if (e.target.tagName === 'SPAN') {
+		if (e.target.tagName.toUpperCase() === 'SPAN') {
 			setSearchKey(e.target.innerHTML)
-			props.getTrueSongs(e.target.innerHTML)
 			setFlagHots(false);
 			setFlagKeyRest(false);
+			console.log('qingqiul:::');
+			setFlagSongRest(true)
+			props.getTrueSongs(e.target.innerHTML)
+		}
+	}
+
+	// 跳转播放页
+	function redayPlay(e) {
+		if (e.target.tagName.toUpperCase() === 'SPAN') {
+			props.history.push({
+				pathname: `/play/${e.target.dataset.id}`
+			})
 		}
 	}
 
@@ -93,6 +111,17 @@ function IndexPage(props) {
 								return <p key={index}>
 									<img src={searchI} alt=""/>
 									<span data-id={item.id}>{item.name}</span>
+								</p>
+							})
+						}
+					</div>
+					:null
+				}
+				{flagSongRest
+					?<div className="resultSongs" onClick={redayPlay}>
+						{props.searchStore.songsList.map((item,index)=>{
+								return <p key={index}>
+									<span data-id={item.id}>{item.name}------id:{item.id}</span>
 								</p>
 							})
 						}
