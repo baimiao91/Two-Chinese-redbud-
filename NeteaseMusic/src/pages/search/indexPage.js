@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 11:41:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-20 15:46:34
+ * @Last Modified time: 2019-02-21 19:18:59
  */
 import React, {
 	useState,
@@ -69,9 +69,8 @@ function IndexPage(props) {
 			setSearchKey(e.target.innerHTML)
 			setFlagHots(false);
 			setFlagKeyRest(false);
-			console.log('qingqiul:::');
-			setFlagSongRest(true)
-			props.getTrueSongs(e.target.innerHTML)
+			setFlagSongRest(true);
+			props.getTrueSongs(e.target.innerHTML);
 		}
 	}
 
@@ -81,6 +80,7 @@ function IndexPage(props) {
 			props.history.push({
 				pathname: `/play/${e.target.dataset.id}`
 			})
+			props.addSongsList(props.searchStore.songsList.map(item => item.id).join(','))
 		}
 	}
 
@@ -141,20 +141,26 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getHotSearch: () => {
+		getHotSearch: () => { // 获取热门搜索
 			dispatch({
 				type: 'search/getHotSearch',
 			})
 		},
-		getKeySearch: payload => {
+		getKeySearch: payload => { // 获取实时输入的推荐搜索建议
 			dispatch({
 				type: 'search/getKeySearch',
 				payload
 			})
 		},
-		getTrueSongs: payload => {
+		getTrueSongs: payload => { // 搜索歌曲
 			dispatch({
 				type: 'search/getTrueSongs',
+				payload
+			})
+		},
+		addSongsList: payload => { // 添加搜索的歌曲列表
+			dispatch({
+				type: 'player/getPlaySong',
 				payload
 			})
 		}

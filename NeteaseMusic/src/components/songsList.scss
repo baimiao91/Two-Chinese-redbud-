@@ -1,0 +1,54 @@
+/*
+* @Author: i白描
+* @Date:   2019-02-21 21:06:47
+* @Last Modified by:   i白描
+* @Last Modified time: 2019-02-21 21:31:22
+*/
+
+
+:global {
+	::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.songsListContainer {
+	width:100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  color: #fff;
+	background: rgba(0,0,0,.8);
+
+  >div {
+  	width:100%;
+  	position: absolute;
+	  left: 0;
+	  bottom: 0;
+	  right: 0;
+  	max-height: 9rem;
+  	overflow: auto;
+  	background: rgb(39, 40, 32);
+    p {
+      height: 1rem;
+      line-height: 1rem;
+      padding: 0 0.8rem;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        display: block;
+      }
+
+      span:nth-child(2) {
+        max-width: 80%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}
