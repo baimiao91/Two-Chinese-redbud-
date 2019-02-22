@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 12:01:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-21 21:08:55
+ * @Last Modified time: 2019-02-22 14:20:13
  */
 import React, {
 	useEffect,
@@ -50,7 +50,7 @@ function IndexPage(props) {
 	// 实时播放总时长
 	let [songLiveTime, setSongLiveTime] = useState(0);
 	// 实时播放总时长
-	let [isSongList, setIsSongList] = useState(true);
+	let [isSongList, setIsSongList] = useState(false);
 
 	// audio的ref
 	let audioEle = React.createRef();
@@ -94,6 +94,7 @@ function IndexPage(props) {
 
 	// 开始播放-最初播放临近点--设置总时长
 	function loadPlay() {
+		// audioEle.current.play();
 		setSongTime(audioEle.current.duration);
 	}
 
@@ -108,17 +109,17 @@ function IndexPage(props) {
 		setSongLiveTime(e);
 	}
 
+	// 拖动结束
+	function afterSongLiveTime(e) {
+		audioEle.current.currentTime = e;
+		setSPlay(true);
+	}
+
 	// 该变播放模式
 	function changePattern() {
 		props.changePattern({
 			pattern: ((props.playerStore.pattern + 1) % 4)
 		})
-	}
-
-	// 拖动结束
-	function afterSongLiveTime(e) {
-		audioEle.current.currentTime = e;
-		setSPlay(true);
 	}
 
 	// 改变播放歌曲
@@ -127,10 +128,29 @@ function IndexPage(props) {
 			audioEle.current.pause();
 			audioEle.current.currentTime = 0;
 			audioEle.current.play();
+			setSPlay(true);
 		} else {
-			console.log('不是单曲循环了，根据类型决定播放顺序：：', type);
+			props.changeLiveSong(type);
+			audioEle.current.play();
 		}
 	}
+
+	// 改变列表组件得显示
+	function changeShowList() {
+		setIsSongList(true);
+	}
+
+	// 发送组件到内部事件/组件发送来得事件
+	function compSonsList(tag) {
+		console.log('父组件：：：：', tag);
+		if (tag.target.tagName === 'DIV') {
+			setIsSongList(false);
+		} else {
+			// retqueurn '1';
+			// ssefalse
+		}
+	}
+
 
 	if (!Object.keys(props.playerStore.liveSong).length) {
 		return null;
@@ -186,17 +206,17 @@ function IndexPage(props) {
 			<div className="playBtn">
 				<div className="actAc">
 					<span onClick={changePattern}><img src={props.playerStore.pattern===0?singleCycleIcon:props.playerStore.pattern===1?orderCycleIcon:props.playerStore.pattern===2?orderPlayIcon:randomPlayIcon} alt=""/></span>
-					<span><img src={LeftPlayIcon} alt=""/></span>
+					<span onClick={()=>changePlaySong('prev')}><img src={LeftPlayIcon} alt=""/></span>
 					<span onClick={changeSPlay} >{sPlay?<img src={PlayIngIcon} alt=""/>:<img src={PlayIcon} alt=""/>}</span>
-					<span><img src={RightPlayIcon} alt=""/></span>
-					<span><img src={SongListIcon} alt=""/></span>
+					<span onClick={()=>changePlaySong('next')}><img src={RightPlayIcon} alt=""/></span>
+					<span onClick={changeShowList} ><img src={SongListIcon} alt=""/></span>
 				</div>
 			</div>
 			<div className="audioBox">
 				<audio src={props.playerStore.liveSong.url} autoPlay ref={audioEle} onTimeUpdate={timeChange} onCanPlay={loadPlay} ></audio>
 			</div>
 			{/*歌曲列表组件*/}
-			{isSongList?<SongList songList={props.playerStore.songList} />:null}
+			{isSongList?<SongList songList={props.playerStore.songList} current={props.playerStore.playCurrent}  compSonsList={compSonsList} />:null}
 		</div>
 	);
 }
@@ -218,6 +238,12 @@ const mapDispatchToProps = dispatch => {
 		changePattern: payload => {
 			dispatch({
 				type: 'player/updateState',
+				payload
+			})
+		},
+		changeLiveSong: payload => {
+			dispatch({
+				type: 'player/changeSongPlayer',
 				payload
 			})
 		}

@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 13:39:25
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-21 20:44:25
+ * @Last Modified time: 2019-02-22 20:59:44
  */
 
 import {
@@ -17,6 +17,7 @@ export default {
 	state: {
 		pattern: 0, //0代表单曲，1代表列表循环，2代表顺序播放，3代表随机播放
 		liveSong: {}, // 当前播放歌曲内容
+		playCurrent: -1, // 播放下标
 		songList: window.localStorage.getItem('songList') && JSON.parse(window.localStorage.getItem('songList')) || [], // 歌曲列表
 	},
 
@@ -30,16 +31,11 @@ export default {
 			select
 		}) {
 			let songRest = yield call(getSongsDet, payload);
-			let songUrlRest = yield call(getSongUrl, payload);
 			let playerState = yield select(state => state.player);
-			console.log('歌曲真实url::::', payload, songRest);
+			// console.log('歌曲真实url::::', payload, songRest);
 			if (songRest.data && songRest.data.code === 200) {
 				songRest.data.songs.forEach(item => {
-					songUrlRest.data.data.forEach(value => {
-						if (item.id === value.id) {
-							item.url = value.url;
-						}
-					})
+					item.url = `https://music.163.com/song/media/outer/url?id=${item.id}.mp3`;
 				})
 
 				if (payload.indexOf(',') !== -1) {
@@ -48,8 +44,10 @@ export default {
 						songList: songRest.data.songs
 					}
 				} else {
+					let current = playerState.songList.findIndex(item => item.id === songRest.data.songs[0].id)
 					playerState = {
-						liveSong: songRest.data.songs[0]
+						liveSong: songRest.data.songs[0],
+						playCurrent: current
 					}
 				}
 
@@ -68,6 +66,23 @@ export default {
 				...action.payload
 			};
 		},
+		changeSongPlayer(state, action) {
+			let playCurrent = 0;
+			if (action.payload === 'next') {
+				if (state.pattern === 1) { // 列表循环模仿
+					playCurrent = (state.playCurrent + 1) % state.songList.length;
+				} else if (state.pattern === 3) { // 随机播放   根据播放列表的长度随机数
+					let random = Math.round(Math.random() * state.songList.length);
+					console.log(random);
+					playCurrent = random;
+				}
+			}
+			return {
+				...state,
+				playCurrent,
+				liveSong: state.songList[playCurrent]
+			}
+		}
 	},
 
 };

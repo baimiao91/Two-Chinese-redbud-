@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-21 21:06:47
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-21 21:31:22
+* @Last Modified time: 2019-02-22 09:48:54
 */
 
 
@@ -41,14 +41,19 @@
 
       span {
         display: block;
-      }
-
-      span:nth-child(2) {
-        max-width: 80%;
+        min-width: 30%;
+        max-width: 70%;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
       }
+      span:nth-child(2) {
+      	text-align: center;
+      }
     }
   }
+}
+
+.blue {
+	color:rgb(93,118,218);
 }
