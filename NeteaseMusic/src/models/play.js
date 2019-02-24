@@ -2,12 +2,11 @@
  * @Author: i白描
  * @Date:   2019-02-20 13:39:25
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-22 20:59:44
+ * @Last Modified time: 2019-02-23 11:24:16
  */
 
 import {
-	getSongsDet,
-	getSongUrl
+	getSongsDet
 } from '@/services/api';
 
 export default {
@@ -75,12 +74,32 @@ export default {
 					let random = Math.round(Math.random() * state.songList.length);
 					console.log(random);
 					playCurrent = random;
+				} else if (state.pattern === 2) {
+					playCurrent = (state.playCurrent + 1) % state.songList.length;
+				}
+			}
+			if (action.payload === 'prev') {
+				if (state.pattern === 1) { // 列表循环模仿
+					playCurrent = (state.playCurrent - 1 + state.songList.length) % state.songList.length;
+				} else if (state.pattern === 3) { // 随机播放   根据播放列表的长度随机数
+					let random = Math.round(Math.random() * state.songList.length);
+					console.log(random);
+					playCurrent = random;
+				} else if (state.pattern === 2) {
+					playCurrent = (state.playCurrent - 1 + state.songList.length) % state.songList.length;
 				}
 			}
 			return {
 				...state,
 				playCurrent,
 				liveSong: state.songList[playCurrent]
+			}
+		},
+		directPlayCurrent(state, action) {
+			return {
+				...state,
+				playCurrent: action.payload,
+				liveSong: state.songList[action.payload]
 			}
 		}
 	},

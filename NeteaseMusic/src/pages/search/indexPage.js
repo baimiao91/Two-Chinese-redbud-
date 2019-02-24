@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 11:41:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-21 19:18:59
+ * @Last Modified time: 2019-02-23 09:45:24
  */
 import React, {
 	useState,
@@ -14,7 +14,7 @@ import {
 import './indexPage.scss';
 import searchI from '@/assets/search.png';
 
-function IndexPage(props) {
+function IndexPage(props, state) {
 	console.log('props::::search:::', props);
 
 	let [searchKey, setSearchKey] = useState('');

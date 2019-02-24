@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-20 16:51:15
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-22 14:14:30
+* @Last Modified time: 2019-02-23 10:56:15
 */
 :global {
   .playerContainer {
@@ -49,6 +49,7 @@
       display: flex;
       flex-direction: column;
       white-space: nowrap;
+      overflow:hidden;
 
       >span {
         display: block;
@@ -142,6 +143,9 @@
 			flex:1;
   		touch-action: none;
 		}
+		>span {
+			color:rgb(255,255,255);
+		}
 	}
 	.progress .am-slider-wrapper .am-slider .am-slider-handle {
 		border:0;
@@ -189,7 +193,13 @@
   animation-play-state: paused;
 }
 
+/*文字移动*/
+.transText {
+	animation:transWord 15s 2s linear infinite;
+}
 
+
+/* 图片旋转 */
 @keyframes roateImg {
   from {
     transform: rotate(0deg);
@@ -200,6 +210,18 @@
   }
 }
 
+/* 文字移动 */
+@keyframes transWord {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* 扩大后回位原位 */
 @keyframes scaleImg {
   from {
     transform: scale(1.2);
@@ -210,6 +232,7 @@
   }
 }
 
+/* -webkit-内核-图片旋转 */
 @-webkit-keyframes roateImg {
   from {
     transform: rotate(0deg);

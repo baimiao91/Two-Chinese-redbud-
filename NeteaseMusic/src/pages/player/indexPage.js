@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 12:01:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-22 14:20:13
+ * @Last Modified time: 2019-02-23 11:24:50
  */
 import React, {
 	useEffect,
@@ -49,7 +49,7 @@ function IndexPage(props) {
 	let [songTime, setSongTime] = useState(0);
 	// 实时播放总时长
 	let [songLiveTime, setSongLiveTime] = useState(0);
-	// 实时播放总时长
+	// 控制歌曲列表显示
 	let [isSongList, setIsSongList] = useState(false);
 
 	// audio的ref
@@ -131,6 +131,7 @@ function IndexPage(props) {
 			setSPlay(true);
 		} else {
 			props.changeLiveSong(type);
+			setSPlay(true);
 			audioEle.current.play();
 		}
 	}
@@ -142,12 +143,19 @@ function IndexPage(props) {
 
 	// 发送组件到内部事件/组件发送来得事件
 	function compSonsList(tag) {
-		console.log('父组件：：：：', tag);
+		console.log('父组件：：：：', tag, tag.target.dataset.songid);
 		if (tag.target.tagName === 'DIV') {
 			setIsSongList(false);
 		} else {
-			// retqueurn '1';
-			// ssefalse
+			let ids = parseInt(tag.target.dataset.songid);
+			if (ids === props.playerStore.liveSong.id) {
+				return;
+			} else {
+				let current = props.playerStore.songList.findIndex(item => item.id === ids);
+				props.directPlayCurrent(current);
+				setIsSongList(false);
+				setSPlay(true);
+			}
 		}
 	}
 
@@ -163,7 +171,7 @@ function IndexPage(props) {
 			<div className="ply_head">
 				<span onClick={()=>window.history.back()} className="goBackBtn">返回</span>
 				<p className="songMsg">
-					<span>{props.playerStore.liveSong.name} {props.playerStore.liveSong.alia[0] ? '-'+props.playerStore.liveSong.alia[0] : null}</span>
+					<span className={styles.transText}>{props.playerStore.liveSong.name} {props.playerStore.liveSong.alia[0] ? '-'+props.playerStore.liveSong.alia[0] : null}</span>
 					<span>{tsinger}</span>
 				</p>
 				<span className="share">分享</span>
@@ -244,6 +252,12 @@ const mapDispatchToProps = dispatch => {
 		changeLiveSong: payload => {
 			dispatch({
 				type: 'player/changeSongPlayer',
+				payload
+			})
+		},
+		directPlayCurrent: payload => { // 直接修改播放下标
+			dispatch({
+				type: 'player/directPlayCurrent',
 				payload
 			})
 		}

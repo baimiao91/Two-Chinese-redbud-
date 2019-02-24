@@ -2,7 +2,7 @@
 * @Author: i白描
 * @Date:   2019-02-21 21:06:47
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-22 09:48:54
+* @Last Modified time: 2019-02-23 10:57:48
 */
 
 
@@ -30,25 +30,26 @@
   	max-height: 9rem;
   	overflow: auto;
   	background: rgb(39, 40, 32);
-    p {
-      height: 1rem;
-      line-height: 1rem;
-      padding: 0 0.8rem;
+  	padding-left: 0.3rem;
+  	box-sizing: border-box;
+    >p {
+    	width: 100%;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      border-bottom:0.02rem solid rgb(70,71,63);
       box-sizing: border-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      span {
-        display: block;
+     	span {
+     		display: block;
+     		width:100%;
         min-width: 30%;
-        max-width: 70%;
+        max-width: 95%;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
-      }
-      span:nth-child(2) {
-      	text-align: center;
       }
     }
   }
