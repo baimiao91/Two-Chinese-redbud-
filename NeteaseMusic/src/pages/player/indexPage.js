@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 12:01:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-23 11:24:50
+ * @Last Modified time: 2019-02-25 18:34:11
  */
 import React, {
 	useEffect,
@@ -19,6 +19,8 @@ import {
 import {
 	Slider
 } from 'antd-mobile';
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.min.css';
 
 // 列表循环icon
 import orderCycleIcon from '@/assets/order-cycle.png';
@@ -37,6 +39,8 @@ import SongListIcon from '@/assets/songlist.png';
 // 引入歌曲列表组件
 import SongList from '@/components/songsList';
 
+var mySwiper = null;
+
 function IndexPage(props) {
 	console.log('props::::player::', props);
 	// 歌手信息
@@ -51,6 +55,10 @@ function IndexPage(props) {
 	let [songLiveTime, setSongLiveTime] = useState(0);
 	// 控制歌曲列表显示
 	let [isSongList, setIsSongList] = useState(false);
+	// 控制歌词显示
+	let [isLyric, setIsLyric] = useState(false);
+	// 控制歌词显示到第几行
+	let [lyricLine, setLyricLine] = useState(0);
 
 	// audio的ref
 	let audioEle = React.createRef();
@@ -63,7 +71,7 @@ function IndexPage(props) {
 	// 设置标题
 	useEffect(() => {
 		if (props.playerStore.liveSong) {
-			let singer = ''
+			let singer = '';
 			props.playerStore.liveSong.ar && props.playerStore.liveSong.ar.forEach((item, index) => {
 				singer += item.name + '/'
 			})
@@ -81,11 +89,27 @@ function IndexPage(props) {
 
 	// 根据播放实时时间判断逻辑
 	useEffect(() => {
-		// console.log(songLiveTime, songTime);
+		// console.log(songLiveTime, lyricLine, mySwiper instanceof Swiper, '：：：实时时间：：：多少行');
+		if (mySwiper instanceof Swiper) {
+			// mySwiper.slideTo(lyricLine);
+		}
 		if (songLiveTime && (songLiveTime === songTime)) {
 			changePlaySong('next')
 		}
-	}, [songLiveTime])
+	}, [songLiveTime, lyricLine])
+
+	// 根据当前歌词获取歌词
+	useEffect(() => {
+		props.forLyric(props.playerStore.liveSong.id);
+	}, [props.playerStore.liveSong.id])
+
+	// 实例化swiper
+	useEffect(() => {
+		mySwiper = new Swiper('.swiper-container', {
+			autoplay: true,
+		})
+		console.log('1111111111111有个词', );
+	}, [props.playerStore])
 
 	// 改变控制播放
 	function changeSPlay() {
@@ -98,9 +122,23 @@ function IndexPage(props) {
 		setSongTime(audioEle.current.duration);
 	}
 
-	// 播放时间/进度条的实时更改
+	// 播放时间/进度条的实时更改    夹杂着歌词的处理
 	function timeChange() {
+		// console.log(audioEle.current.currentTime, audioEle.current.duration, '：：：实时播放时间');
+
 		setSongLiveTime(audioEle.current.currentTime);
+		if (Object.keys(props.playerStore.lyric)) {
+			for (let i = 0, len = props.playerStore.lyric.times.length; i < len; i++) {
+				if (songLiveTime < props.playerStore.lyric.times[i] * 1) {
+					if (i - 1 !== lyricLine) {
+						setLyricLine(i - 1);
+					}
+					break;
+				}
+			}
+			console.log('2222222222:::', mySwiper);
+		}
+
 	}
 
 	// t拖动进度条
@@ -159,6 +197,15 @@ function IndexPage(props) {
 		}
 	}
 
+	// 控制歌词的显示
+	function changeLyric() {
+		setIsLyric(true);
+	}
+
+	// 控制歌词的隐藏
+	function cancelLyric() {
+		setIsLyric(false);
+	}
 
 	if (!Object.keys(props.playerStore.liveSong).length) {
 		return null;
@@ -177,21 +224,44 @@ function IndexPage(props) {
 				<span className="share">分享</span>
 			</div>
 
-		{/*各歌曲封面转盘*/}
-			<div className="playBox">
+			{isLyric?
+				<div className="lyricBox" onClick={cancelLyric}>
+					<div className="swiper-container">
+						<div className="swiper-wrapper">
+							<div className="swiper-slide">111</div>
+							<div className="swiper-slide">222</div>
+							<div className="swiper-slide">333</div>
+							<div className="swiper-slide">444</div>
+							<div className="swiper-slide">555</div>
+						</div>
+					</div>
+				</div>
+				:<div className="playBox">
+			{/*{
+								props.playerStore.lyric && props.playerStore.lyric.texts.map( (item,index) => {
+									return <div className="swiper-slide" key={index}>
+													<p>{item.text}</p>
+												</div>
+								} )
+							}*/}
+				{/*各歌曲封面转盘*/}
 				<div className="imgBox">
 					<div className="disc">
-						<span className={sPlay?styles.roteImg:styles.disableRote} style={{backgroundImage:(Object.keys(props.playerStore.liveSong).length)?`url(${props.playerStore.liveSong.al.picUrl})`:'url("")'}}></span>
+						<span className={sPlay?styles.roteImg:styles.disableRote} style={{backgroundImage:(Object.keys(props.playerStore.liveSong).length)?`url(${props.playerStore.liveSong.al.picUrl})`:'url("")'}} onClick={changeLyric}></span>
 					</div>
 				</div>
 			</div>
-			<div className="userAction">
-				<p>喜欢</p>
-				<p>下载</p>
-				<p>鲸鱼</p>
-				<p>评论</p>
-				<p>更多</p>
-			</div>
+			}
+			{isLyric?null:
+				<div className="userAction">
+					{/* 用户可选操作 */}
+					<p>喜欢</p>
+					<p>下载</p>
+					<p>鲸鱼</p>
+					<p>评论</p>
+					<p>更多</p>
+				</div>
+			}
 			{/*歌曲实时播放进度条*/}
 			{songTime?
 				<div className="progress">
@@ -258,6 +328,12 @@ const mapDispatchToProps = dispatch => {
 		directPlayCurrent: payload => { // 直接修改播放下标
 			dispatch({
 				type: 'player/directPlayCurrent',
+				payload
+			})
+		},
+		forLyric: payload => { // 获取歌词
+			dispatch({
+				type: 'player/forLyric',
 				payload
 			})
 		}

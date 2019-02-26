@@ -3,6 +3,9 @@
   "scripts": {
     "start": "roadhog server",
     "build": "roadhog build",
+    "build:test": "cross-env env=test roadhog build",
+    "build:pre": "cross-env env=pre roadhog build",
+    "build:prod": "cross-env env=prod roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
@@ -11,7 +14,9 @@
     "dva": "^2.4.1",
     "js-cookie": "^2.2.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "swiper": "^3.4.2",
+    "vconsole": "^3.3.0"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "^0.3.2",

@@ -2,10 +2,48 @@
 * @Author: i白描
 * @Date:   2019-02-14 19:47:55
 * @Last Modified by:   i白描
-* @Last Modified time: 2019-02-18 19:54:12
+* @Last Modified time: 2019-02-26 20:26:38
 */
 :global{
-
+	.mineSongList {
+		width:100%;
+		height:auto;
+		padding: 0 0.2rem;
+		box-sizing:border-box;
+		.playlist {
+			width: 100%;
+			height:auto;
+			overflow: hidden;
+			.listItem {
+				width:100%;
+				padding:0.1rem 0;
+				border-bottom: 0.02rem solid rgb(230,239,246);
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				>p {
+					width: 1.6rem;
+					height: 1.6rem;
+					border-radius: 0.1rem;
+					overflow: hidden;
+				}
+				.nameT {
+					flex:1;
+					height:1.6rem;
+					margin-left: 0.1rem;
+				}
+			}
+		}
+	}
+	.playlist .listItem .nameT {
+		h3,span {
+			display: block;
+			line-height: 0.8rem;
+		}
+		h3 {
+			font-size: 0.4rem;
+		}
+	}
 }
 
 .mineContainer {

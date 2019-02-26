@@ -2,12 +2,17 @@
  * @Author: i白描
  * @Date:   2019-02-20 13:39:25
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-23 11:24:16
+ * @Last Modified time: 2019-02-26 08:05:41
  */
 
 import {
-	getSongsDet
+	getSongsDet,
+	getLyric
 } from '@/services/api';
+import {
+	toSec
+} from '@/utils/index';
+
 
 export default {
 
@@ -18,6 +23,7 @@ export default {
 		liveSong: {}, // 当前播放歌曲内容
 		playCurrent: -1, // 播放下标
 		songList: window.localStorage.getItem('songList') && JSON.parse(window.localStorage.getItem('songList')) || [], // 歌曲列表
+		lyric: {} // 歌词实例
 	},
 
 	effects: {
@@ -44,16 +50,70 @@ export default {
 					}
 				} else {
 					let current = playerState.songList.findIndex(item => item.id === songRest.data.songs[0].id)
+					console.log('当前歌曲所在下表：：：', current)
 					playerState = {
 						liveSong: songRest.data.songs[0],
 						playCurrent: current
 					}
 				}
 
-				console.log(songRest, ':::更改之后的songsRest');
+				// console.log(songRest, ':::更改之后的songsRest');
 				yield put({
 					type: 'updateState',
 					payload: playerState
+				})
+			}
+		},
+		* forLyric({
+			payload
+		}, {
+			call,
+			put
+		}) {
+			let rest = yield call(getLyric, payload);
+			if (rest.data && rest.data.code === 200) {
+				let lyrics = rest.data.lrc.lyric.split('\n');
+				// 删除最后一项为空的歌词
+				lyrics.filter(item => item);
+				lyrics = lyrics.map((item, index) => {
+					let arr = item.split(']');
+					// 如果没有歌词，往后边找三项，补全歌词
+					if (!arr[1] && index < lyrics.length - 2) {
+						for (let i = index + 1, len = index + 3; i < len; i++) {
+							let temp = lyrics[i].split(']');
+							if (temp[1]) {
+								arr[1] = temp[1];
+								break;
+							}
+						}
+						return arr.join(']');
+					} else {
+						return item;
+					}
+				})
+				let times = [],
+					texts = [];
+				lyrics.forEach((item, index) => {
+					let arr = item.replace('[', '').split(']');
+					if (arr[0]) {
+						times.push(toSec(arr[0]))
+					}
+					if (arr[1]) {
+						texts.push({
+							time: toSec(arr[0]),
+							text: arr[1]
+						})
+					}
+				})
+				console.log('geshihua秒数：：：', times, texts);
+				let tLyric = {};
+				tLyric.times = times;
+				tLyric.texts = texts;
+				yield put({
+					type: 'updateState',
+					payload: {
+						lyric: tLyric
+					}
 				})
 			}
 		}

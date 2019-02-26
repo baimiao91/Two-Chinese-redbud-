@@ -20,6 +20,16 @@ export function getUserDetail(uid) {
 	return request(`/user/detail?uid=${uid}`)
 }
 
+// 获取用户已有的歌单
+export function getUserSongsList(uid) {
+	return request(`/user/playlist?uid=${uid}`)
+}
+
+// 获取歌单详情
+export function getSogLitDet(ids) {
+	return request(`/playlist/detail?id=${ids}`)
+}
+
 // 获取热门搜索
 export function forSearchHot() {
 	return request('/search/hot')
@@ -41,6 +51,11 @@ export function getSongsDet(ids) {
 }
 
 // 获取歌曲url
-export function getSongUrl(ids) {
-	return request(`/song/url?id=${ids}`)
+// export function getSongUrl(ids) {
+// 	return request(`/song/url?id=${ids}`)
+// }
+
+// 获取歌曲de 歌词
+export function getLyric(ids) {
+	return request(`/lyric?id=${ids}`)
 }

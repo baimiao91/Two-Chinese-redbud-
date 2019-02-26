@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 19:34:54
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-16 09:56:54
+ * @Last Modified time: 2019-02-26 16:13:36
  */
 import React, {
 	useState,
@@ -20,8 +20,8 @@ import Lock from '@/assets/lock.png';
 
 function LoginPage(props) {
 	console.log('props::::', props);
-	let [phone, setPhone] = useState(17600194842);
-	let [password, setPasswd] = useState('147852..');
+	let [phone, setPhone] = useState('');
+	let [password, setPasswd] = useState('');
 
 	useEffect(() => {
 		if (props.loginStatus === 'fail') {

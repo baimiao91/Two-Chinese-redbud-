@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 18:36:36
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-20 15:48:25
+ * @Last Modified time: 2019-02-26 20:41:14
  */
 
 import React from 'react';
@@ -18,6 +18,7 @@ import MainPage from '@/pages/MainPage';
 import LoginRegistPage from '@/pages/registLogin/indexPage'
 import SearchPage from '@/pages/search/indexPage'
 import PlayPage from '@/pages/player/indexPage'
+import SogLitDetPage from '@/pages/soglitdet/indexPage'
 // 引入二级路由组件
 import DiscoverPage from '@/pages/discover/indexPage'
 import VideoPage from '@/pages/video/indexPage'
@@ -45,6 +46,9 @@ let config = {
 	}, {
 		path: '/play/:ids?',
 		component: PlayPage
+	}, {
+		path: '/soglitdet/:ids?',
+		component: SogLitDetPage
 	}, {
 		path: '/main',
 		component: MainPage,

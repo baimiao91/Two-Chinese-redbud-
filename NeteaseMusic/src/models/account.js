@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-18 20:30:58
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-18 20:48:01
+ * @Last Modified time: 2019-02-26 17:01:26
  */
 import {
 	getUserDetail
@@ -48,8 +48,8 @@ export default {
 			return {
 				...state,
 				...action.payload
-			};
-		},
-	},
+			}
+		}
+	}
 
 };
