@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 13:39:25
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-26 08:05:41
+ * @Last Modified time: 2019-02-27 09:25:31
  */
 
 import {
@@ -49,8 +49,7 @@ export default {
 						songList: songRest.data.songs
 					}
 				} else {
-					let current = playerState.songList.findIndex(item => item.id === songRest.data.songs[0].id)
-					console.log('当前歌曲所在下表：：：', current)
+					let current = playerState.songList.findIndex(item => item.id === playerState.liveSong.id)
 					playerState = {
 						liveSong: songRest.data.songs[0],
 						playCurrent: current
@@ -105,7 +104,7 @@ export default {
 						})
 					}
 				})
-				console.log('geshihua秒数：：：', times, texts);
+				// console.log('geshihua秒数：：：', times, texts);
 				let tLyric = {};
 				tLyric.times = times;
 				tLyric.texts = texts;
@@ -132,7 +131,6 @@ export default {
 					playCurrent = (state.playCurrent + 1) % state.songList.length;
 				} else if (state.pattern === 3) { // 随机播放   根据播放列表的长度随机数
 					let random = Math.round(Math.random() * state.songList.length);
-					console.log(random);
 					playCurrent = random;
 				} else if (state.pattern === 2) {
 					playCurrent = (state.playCurrent + 1) % state.songList.length;
@@ -143,7 +141,6 @@ export default {
 					playCurrent = (state.playCurrent - 1 + state.songList.length) % state.songList.length;
 				} else if (state.pattern === 3) { // 随机播放   根据播放列表的长度随机数
 					let random = Math.round(Math.random() * state.songList.length);
-					console.log(random);
 					playCurrent = random;
 				} else if (state.pattern === 2) {
 					playCurrent = (state.playCurrent - 1 + state.songList.length) % state.songList.length;

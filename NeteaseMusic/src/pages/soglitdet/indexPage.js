@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:53
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-26 20:50:42
+ * @Last Modified time: 2019-02-27 08:51:20
  */
 import React, {
 	useEffect
@@ -21,6 +21,9 @@ function IndexPage(props) {
 
 	return (
 		<div>
+			<div className="header">
+				<span onClick={()=>window.history.back()}>返回</span>
+			</div>
 			<p>songlist det</p>
 		</div>
 	);
