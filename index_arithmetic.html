@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>各种算法</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-align: center;
+			margin: auto;
+		}
+		img {
+			display: block;
+			width: 20vw;
+			height: 20vh;
+		}
+		.container{
+			width:100%;
+		}
+		.img-area{
+			height:200px;
+			text-align: center
+		}
+	</style>
+</head>
+<body>
+	<h3>各种算法题与图片懒加载</h3>
+
+	<div class="container">
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/pJ0Hzy9Lilt_6RTtpwNvXXaU.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/9d6dcac7f12b2987996fcc15.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/zVqCyzS1TGkMHbkb7QzTkhLl.jpeg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/rJILajXMtYh9V7sSJ2lsmgAi.jpg">
+		</div>
+		<div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/INOM_1chDzg_KcnrRAB8XUMZ.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/in4m7737dr_pA_5Yo5P7Lb58.jpg">
+		</div>
+		<div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://img.52z.com/upload/news/image/20180721/20180721051014_12703.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/7af79e93820d78c50095ba3f.jpg">
+		</div>
+		<div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/7JAg5NQfvnd0w35rwf54Af-A.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/cHY5wbR5mJg3HlfNg4jd5ZR1.jpg">
+		</div>
+		<div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/G0jqSYcHaVFKZK39DjYKZkcN.jpg">
+    </div>
+    <div class="img-area">
+      <img class="my-photo" alt="loading" data-src="http://123.206.55.50:11000/static/in4m7737dr_pA_5Yo5P7Lb58.jpg">
+    </div>
+  </div>
+
+	<script type="text/javascript">
+
+		var str = "上海自来水来自海上";
+		function toAndFro(str) {
+			return str.split('').reverse().join('') === str ? true : false;
+		}	
+		console.log(toAndFro(str));
+
+		window.onload=checkImgs;
+    window.onscroll = throttle(checkImgs);
+
+		function isInSight(el) {
+			const bound = el.getBoundingClientRect();
+			console.log(bound,'bound::::');
+			const clientHeight = window.innerHeight;
+			//如果只考虑向下滚动加载
+			//const clientWidth=window.innerWeight;
+			return bound.top <= clientHeight + 100;
+		}
+
+		let index = 0;
+		function checkImgs() {
+			const imgs = document.querySelectorAll('.my-photo');
+			for (let i = index; i < imgs.length; i++) {
+				if (isInSight(imgs[i])) {
+					loadImg(imgs[i]);
+					index = i;
+				}
+			}
+		}
+
+		function loadImg(el) {
+			if (!el.src) {
+				const source = el.dataset.src;
+				el.src = source;
+				if(el.complete){
+					console.log('加载完成：：：：',el);
+				}
+			}
+		}
+
+		function throttle(fn, mustRun = 500) {
+			const timer = null;
+			let previous = null;
+			return function() {
+				const now = new Date();
+				const context = this;
+				const args = arguments;
+				if (!previous) {
+					previous = now;
+				}
+				const remaining = now - previous;
+				if (mustRun && remaining >= mustRun) {
+					fn.apply(context, args);
+					previous = now;
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>
