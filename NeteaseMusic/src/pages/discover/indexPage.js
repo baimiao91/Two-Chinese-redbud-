@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-13 18:49:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 11:41:33
+ * @Last Modified time: 2019-02-27 13:53:44
  */
 
 
@@ -18,7 +18,6 @@ import RouterView from '../../router/RouterView'
 import styles from './indexPage.scss';
 
 function IndexPage(props) {
-	console.log('props::::discover::', props);
 
 	function hrefSearch() {
 		props.history.push({

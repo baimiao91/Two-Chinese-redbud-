@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 13:39:25
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-27 09:25:31
+ * @Last Modified time: 2019-02-27 13:52:00
  */
 
 import {
@@ -37,26 +37,24 @@ export default {
 		}) {
 			let songRest = yield call(getSongsDet, payload);
 			let playerState = yield select(state => state.player);
-			// console.log('歌曲真实url::::', payload, songRest);
 			if (songRest.data && songRest.data.code === 200) {
 				songRest.data.songs.forEach(item => {
 					item.url = `https://music.163.com/song/media/outer/url?id=${item.id}.mp3`;
 				})
-
+				// 多个id时的请求返回的歌曲列表，（比如从歌单过来时的多个id，或者搜索结果点击进来时的多个id）
 				if (payload.indexOf(',') !== -1) {
 					window.localStorage.setItem('songList', JSON.stringify(songRest.data.songs));
 					playerState = {
 						songList: songRest.data.songs
 					}
 				} else {
-					let current = playerState.songList.findIndex(item => item.id === playerState.liveSong.id)
+					// 单个请求时得匹配到的id
+					let current = playerState.songList.findIndex(item => item.id === songRest.data.songs[0].id)
 					playerState = {
 						liveSong: songRest.data.songs[0],
 						playCurrent: current
 					}
 				}
-
-				// console.log(songRest, ':::更改之后的songsRest');
 				yield put({
 					type: 'updateState',
 					payload: playerState

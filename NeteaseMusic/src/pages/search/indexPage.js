@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 11:41:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-23 09:45:24
+ * @Last Modified time: 2019-02-27 13:55:51
  */
 import React, {
 	useState,
@@ -15,7 +15,7 @@ import './indexPage.scss';
 import searchI from '@/assets/search.png';
 
 function IndexPage(props, state) {
-	console.log('props::::search:::', props);
+	// console.log('props::::search:::', props);
 
 	let [searchKey, setSearchKey] = useState('');
 	// 控制热门搜索的显示

@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-26 16:48:44
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-26 19:49:11
+ * @Last Modified time: 2019-02-27 13:55:20
  */
 import {
 	getUserDetail,
@@ -26,7 +26,6 @@ export default {
 			put
 		}) { // eslint-disable-line
 			let res = yield call(getUserDetail, payload.uid);
-			console.log(res, '：：：用户信息');
 			if (res.data && res.data.code === 200) {
 				yield put({
 					type: 'updateState',
@@ -45,7 +44,6 @@ export default {
 			put
 		}) { // eslint-disable-line
 			let res = yield call(getUserSongsList, payload.uid);
-			console.log(res, '：：：用户歌单信息');
 			if (res.data && res.data.code === 200) {
 				yield put({
 					type: 'updateState',

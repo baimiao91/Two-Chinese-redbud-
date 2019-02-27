@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:55
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-26 20:41:44
+ * @Last Modified time: 2019-02-27 13:55:38
  */
 import React, {
 	useEffect
@@ -17,7 +17,7 @@ import styles from './indexPage.scss';
 import Cloud from '@/assets/cloud.png';
 
 function IndexPage(props) {
-	console.log('props::::mine:::::', props);
+	// console.log('props::::mine:::::', props);
 
 	// 获取用户id，调试user歌单
 	useEffect(() => {

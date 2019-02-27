@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-20 12:01:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-25 18:34:11
+ * @Last Modified time: 2019-02-27 13:56:58
  */
 import React, {
 	useEffect,
@@ -42,7 +42,7 @@ import SongList from '@/components/songsList';
 var mySwiper = null;
 
 function IndexPage(props) {
-	console.log('props::::player::', props);
+	// console.log('props::::player::', props);
 	// 歌手信息
 	let [tsinger, setTsinger] = useState('');
 	// 控制播放
@@ -108,7 +108,7 @@ function IndexPage(props) {
 		mySwiper = new Swiper('.swiper-container', {
 			autoplay: true,
 		})
-		console.log('1111111111111有个词', );
+		// console.log('1111111111111有个词', );
 	}, [props.playerStore])
 
 	// 改变控制播放
@@ -136,7 +136,7 @@ function IndexPage(props) {
 					break;
 				}
 			}
-			console.log('2222222222:::', mySwiper);
+			// console.log('2222222222:::', mySwiper);
 		}
 
 	}
@@ -181,7 +181,7 @@ function IndexPage(props) {
 
 	// 发送组件到内部事件/组件发送来得事件
 	function compSonsList(tag) {
-		console.log('父组件：：：：', tag, tag.target.dataset.songid);
+		// console.log('父组件：：：：', tag, tag.target.dataset.songid);
 		if (tag.target.tagName === 'DIV') {
 			setIsSongList(false);
 		} else {

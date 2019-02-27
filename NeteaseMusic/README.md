@@ -32,3 +32,26 @@
 
 #### 忽略vconsole之后，打包之后文件大小的一些差异
   ![build与build:prod的差异](build&prod.png)
+
+#### 引入路由懒加载,在router下的index.js中
+```
+  引入import dynamic from 'dva/dynamic';
+  路由懒加载效果
+  const xxxPage = dynamic({
+    component: ()=>import(路由组件路径)
+  })
+```  
+
+#### ui框架的懒加载
+```
+  cnpm/npm install --save babel-plugin-import
+  
+  在.webpackrc.js/.webpackrc中
+    extraBabelPlugins: [
+      ["import", { "libraryName": "antd-mobile(填写你用的ui框架)", "libraryDirectory": "es", "style": "css" }]
+    ]
+  此外还须知，把在index.js中的引入ui框架的样式css注掉
+```
+
+#### 路由与ui框架的懒加载-好处在哪里
+`线上加载较快，一般都是200k左右。假如要是不这么整的就会一个页面在4、5M左右，用户体验较差`

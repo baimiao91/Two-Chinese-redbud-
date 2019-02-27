@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:53
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-18 19:32:36
+ * @Last Modified time: 2019-02-27 13:54:05
  */
 import React, {
 	useEffect
@@ -20,7 +20,7 @@ import SongList from '@/assets/songlist.png';
 import RankList from '@/assets/ranklist.png';
 
 function IndexPage(props) {
-	console.log('props::::recommend:::', props);
+	// console.log('props::::recommend:::', props);
 	// 在hooks中使用useEffect处理异步操作
 	useEffect(() => {
 		props.forBanner();

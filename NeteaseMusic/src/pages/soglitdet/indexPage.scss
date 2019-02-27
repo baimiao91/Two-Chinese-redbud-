@@ -1,0 +1,54 @@
+/*
+* @Author: i白描
+* @Date:   2019-02-26 20:39:17
+* @Last Modified by:   i白描
+* @Last Modified time: 2019-02-27 11:41:50
+*/
+.soglitdetContainer {
+	width:100%;
+	height:auto;
+}
+.header {
+	width:100%;
+	height:1.2rem;
+	display: flex;
+	// justify-content: space-between;
+	align-items:center;
+	background: rgb(53,58,60);
+	color:rgb(255,255,255);
+	padding:0 0.2rem;
+	box-sizing: border-box;
+	>p {
+		margin-left:0.2rem;
+	}
+}
+.songsList {
+	width: 100%;
+	height: auto;
+	padding: 0 0.2rem;
+	box-sizing: border-box;
+}
+.sglcon {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.listItem {
+	width: 100%;
+	height:1.5rem;
+	display: flex;
+	align-items: center;
+	/*&:last-child {
+		>p {
+			border: 0;
+		}
+	}*/
+	> p {
+		flex:1;
+		height: 100%;
+		margin-left: 0.2rem;
+		line-height: 1.5rem;
+		box-sizing: border-box;
+		border-bottom: 1px solid rgb(231,231,231);
+	}
+}

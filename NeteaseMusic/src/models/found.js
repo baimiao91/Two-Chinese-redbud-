@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 10:51:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 16:32:24
+ * @Last Modified time: 2019-02-27 13:54:20
  */
 
 import {
@@ -41,7 +41,7 @@ export default {
 			put
 		}) {
 			let res = yield forReSongList();
-			console.log('data:forReSongList::', res);
+			// console.log('data:forReSongList::', res);
 			if (res.data.code && res.data.code === 200) {
 				let list = res.data.result.slice(0, 6);
 				list.map((item, index) => {
