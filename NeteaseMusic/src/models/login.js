@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 18:50:29
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-19 15:07:40
+ * @Last Modified time: 2019-02-27 18:43:22
  */
 import {
 	routerRedux
@@ -38,7 +38,7 @@ export default {
 					// 做Token检测
 					if (!getToken()) {
 						//利用redux做路由跳转
-						console.log('pathname:::跳转前：：：', pathname);
+						// console.log('pathname:::跳转前：：：', pathname);
 						dispatch(routerRedux.replace({
 							pathname: `/registl?r=${encodeURIComponent(pathname)}`
 						}))
@@ -56,7 +56,7 @@ export default {
 			put
 		}) { // eslint-disable-line
 			let res = yield call(login, payload.phone, payload.password)
-			console.log(res, '::::登录res');
+			// console.log(res, '::::登录res');
 			if (res.data && res.data.code === 200) {
 				setToken(res.data.account.id)
 				yield put({

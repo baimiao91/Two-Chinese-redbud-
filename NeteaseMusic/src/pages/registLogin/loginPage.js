@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-15 19:34:54
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-26 16:13:36
+ * @Last Modified time: 2019-02-27 18:43:25
  */
 import React, {
 	useState,
@@ -19,7 +19,7 @@ import Tel from '@/assets/tel.png';
 import Lock from '@/assets/lock.png';
 
 function LoginPage(props) {
-	console.log('props::::', props);
+	// console.log('props::::', props);
 	let [phone, setPhone] = useState('');
 	let [password, setPasswd] = useState('');
 
@@ -27,7 +27,7 @@ function LoginPage(props) {
 		if (props.loginStatus === 'fail') {
 			Toast.info('登录失败!');
 		} else if (props.loginStatus === 'success') {
-			console.log('登陆成功');
+			// console.log('登陆成功');
 			if (props.location.search) {
 				// console.log('解码：：：：', decodeURIComponent(props.location.search.replace('?r=', '')));
 				props.history.replace(decodeURIComponent(props.location.search.replace('?r=', '')))
