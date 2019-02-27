@@ -2,7 +2,7 @@ import dva from 'dva';
 import './index.css';
 import './common/css/common.scss'
 import './common/js/flexible'
-import 'antd-mobile/dist/antd-mobile.css';
+// import 'antd-mobile/dist/antd-mobile.css';
 
 // 引入vconsole
 // import VConsole from 'vconsole';
