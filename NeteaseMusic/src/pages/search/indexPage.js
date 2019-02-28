@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-19 11:41:17
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-27 13:55:51
+ * @Last Modified time: 2019-02-28 10:00:04
  */
 import React, {
 	useState,
@@ -56,6 +56,8 @@ function IndexPage(props, state) {
 	// 
 	function searchResult(e) {
 		if (searchKey && e.keyCode === 13) {
+			// 添加事件统计
+      window._hmt.push(['_trackEvent', '搜索歌曲', 'keyDown', 'wyMusic']);
 			props.getTrueSongs(searchKey);
 			setFlagHots(false);
 			setFlagKeyRest(false);
@@ -66,6 +68,7 @@ function IndexPage(props, state) {
 	// 搜索建议点击之后的响应结果
 	function restByKey(e) {
 		if (e.target.tagName.toUpperCase() === 'SPAN') {
+      window._hmt.push(['_trackEvent', '返回歌曲', 'click', 'SearchSongs']);
 			setSearchKey(e.target.innerHTML)
 			setFlagHots(false);
 			setFlagKeyRest(false);
