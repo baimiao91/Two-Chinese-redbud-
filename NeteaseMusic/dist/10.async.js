@@ -1,0 +1,1 @@
+webpackJsonp([10],{wzzT:function(e,n,t){"use strict";function c(e){return u.a.createElement("div",null,u.a.createElement("p",null,"video"))}Object.defineProperty(n,"__esModule",{value:!0});var l=t("bxP5"),u=t.n(l),a=t("NmwX");t.n(a);n.default=Object(a.connect)()(c)}});
