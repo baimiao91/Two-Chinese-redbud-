@@ -80,7 +80,7 @@
 
 		function isInSight(el) {
 			const bound = el.getBoundingClientRect();
-			console.log(bound,'bound::::');
+			// console.log(bound,'bound::::');
 			const clientHeight = window.innerHeight;
 			//如果只考虑向下滚动加载
 			//const clientWidth=window.innerWeight;
@@ -125,6 +125,29 @@
 				}
 			}
 		}
+
+
+		// 快速排序
+		function quickSort(elements) {
+			if(elements.length <= 1) {
+				return elements
+			}
+			var pivotIndex = Math.floor(elements.length/2);
+			var pivot = elements.splice(pivotIndex,1)[0];
+			console.log('中间值之后：：：',pivot,pivotIndex);
+			var left = [];
+			var right = [];
+			for(var i=0;i<elements.length;i++) {
+				if(elements[i]<pivot){
+					left.push(elements[i])
+				} else {
+					right.push(elements[i]);
+				}
+			}
+			return quickSort(left).concat([pivot],quickSort(right));
+		}
+		var elements = [5,3,6,8,79,19,23,22];
+		console.log('快速排序：：：',quickSort(elements));
 
 	</script>
 </body>
