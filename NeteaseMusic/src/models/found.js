@@ -2,12 +2,13 @@
  * @Author: i白描
  * @Date:   2019-02-14 10:51:18
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-27 13:54:20
+ * @Last Modified time: 2019-03-17 15:09:30
  */
 
 import {
 	forBanner,
-	forReSongList
+	forReSongList,
+	forDayRecomm
 } from '@/services/api';
 
 export default {
@@ -59,6 +60,15 @@ export default {
 					}
 				})
 			}
+		},
+		*forDayRecomm({
+			payload
+		},{
+			call,
+			put
+		}) {
+			let rest = yield forDayRecomm();
+			console.log('每日推荐：：：：：',rest);
 		}
 	},
 

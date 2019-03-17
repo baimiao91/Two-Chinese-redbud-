@@ -59,3 +59,8 @@ export function getSongsDet(ids) {
 export function getLyric(ids) {
 	return request(`/lyric?id=${ids}`)
 }
+
+// 获取每日推荐
+export function forDayRecomm (){
+	return request('/recommend/songs')
+}

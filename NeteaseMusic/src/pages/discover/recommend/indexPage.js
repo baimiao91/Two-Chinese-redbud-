@@ -2,7 +2,7 @@
  * @Author: i白描
  * @Date:   2019-02-14 19:47:53
  * @Last Modified by:   i白描
- * @Last Modified time: 2019-02-27 13:54:05
+ * @Last Modified time: 2019-03-17 15:09:55
  */
 import React, {
 	useEffect
@@ -26,6 +26,13 @@ function IndexPage(props) {
 		props.forBanner();
 		props.forReSongList();
 	}, []);
+
+	// 获取每日推荐
+	function dayRecomm(){
+		console.log('111');
+		props.forDayRecomm();
+	}
+
 	return (
 		<div className={style.recommendContainer}>
 			<div className={style.bgc}></div>
@@ -45,7 +52,7 @@ function IndexPage(props) {
 					<b><img src={FM} alt=""/></b>
 					<span>私人FM</span>
 				</p>
-				<p>
+				<p onClick={() => dayRecomm()}>
 					<b><img src={DayRecommend} alt=""/></b>
 					<span>每日推荐</span>
 				</p>
@@ -91,6 +98,11 @@ const mapDispatchToProps = dispatch => {
 		forReSongList: () => {
 			dispatch({
 				type: 'found/forReSongList'
+			})
+		},
+		forDayRecomm: () => {
+			dispatch({
+				type: 'found/forDayRecomm'
 			})
 		}
 	}
